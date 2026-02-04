@@ -7,6 +7,11 @@ description: Deploy applications and websites to Vercel. Use when the user reque
 
 Deploy any project to Vercel instantly. **Always deploy as preview** (not production) unless the user explicitly asks for production.
 
+## Prerequisites
+
+- When sandboxing blocks the deployment network calls, rerun with `sandbox_permissions=require_escalated`.
+- The deployment might take a few minutes. Use appropriate timeout values.
+
 ## Quick Start
 
 **Just run this (with a 10 minute timeout):**
@@ -42,3 +47,15 @@ vercel deploy [path] --prod -y
 Show the user the deployment URL. For fallback deployments, also show the claim URL.
 
 **Do not** curl or fetch the deployed URL to verify it works. Just return the link.
+
+## Troubleshooting
+
+### Escalated Network Access
+
+If deployment fails due to network issues (timeouts, DNS errors, connection resets), rerun the deploy with escalated permissions (use `sandbox_permissions=require_escalated`). The deploy requires escalated network access when sandbox networking blocks outbound requests.
+
+Example guidance to the user:
+
+```
+The deploy needs escalated network access to deploy to Vercel. I can rerun the command with escalated permissions—want me to proceed?
+```
