@@ -20,15 +20,15 @@ If that fails with "No existing credentials found", use the fallback method belo
 
 ## Fallback (No Auth)
 
-If CLI fails with auth error, deploy via curl:
+If CLI fails with auth error, use the deploy script:
 
 ```bash
-tar -czf /tmp/deploy.tgz -C [path] --exclude='node_modules' --exclude='.git' . && curl -s -X POST "https://codex-deploy-skills.vercel.sh/api/deploy" -F "file=@/tmp/deploy.tgz"
+./scripts/deploy.sh [path]
 ```
 
-Returns JSON with `previewUrl` and `claimUrl`.
+The script handles framework detection, packaging, and deployment. It waits for the build to complete and returns JSON with `previewUrl` and `claimUrl`.
 
-**Tell the user:** "Your deployment is building at [previewUrl]. Claim it at [claimUrl] to view build progress."
+**Tell the user:** "Your deployment is ready at [previewUrl]. Claim it at [claimUrl] to manage your deployment."
 
 ## Production Deploys
 
